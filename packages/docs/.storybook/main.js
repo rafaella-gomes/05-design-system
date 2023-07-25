@@ -21,6 +21,39 @@ module.exports = {
       config.base = '/05-design-system/'
     }
 
-    return config
+    return {
+      ...config,
+      esbuild: {
+        ...config.esbuild,
+        jsxInject: `import React from 'react'`,
+      },
+      rollupOptions: {
+        ...config.rollupOptions,
+        external: ["react", "react-dom"],
+        output: {
+          globals: {
+            react: "React",
+            "react-dom": "ReactDOM",
+          },
+        },
+      }}
+    // return {
+    //   ...config,
+    //   esbuild: {
+    //     ...config.esbuild,
+    //     jsxInject: `import React from 'react'`,
+    //   },
+    //   rollupOptions: {
+    //     ...config.rollupOptions,
+    //     external: ["react", "react-dom"],
+    //     output: {
+          
+    //       globals: {
+    //         react: "React",
+    //         "react-dom": "ReactDOM",
+    //       },
+    //     },
+    //   },
+    // };
   }
 }
